@@ -19,12 +19,12 @@ class EntriesType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ["attr" => ["placeholder" => "please type the todo name", "class" => "form-control mb-2"]])
-            ->add('bloggerName', TextType::class)
-            ->add('destination', TextareaType::class)
-            ->add('story', TextType::class)
-            ->add('visitDate', DateType::class)
-            ->add('entryDate', DateType::class)
+            ->add('bloggerName', TextType::class, ["attr" => ["placeholder" => "Enter your Name", "class" => "form-control mb-2"]])
+            ->add('destination', TextType::class, ["attr" => ["placeholder" => "Destination", "class" => "form-control mb-2"]])
+            ->add('story', TextareaType::class, ["attr" => ["placeholder" => "Write your story here", "class" => "form-control mb-2"]])
+            ->add('visitDate', DateType::class, ["attr" => ["class" => "form-control mb-2"]])
+            ->add('entryDate', DateType::class, ["attr" => ["class" => "form-control mb-2"]])
 
-            ->add('Create Entry', SubmitType::class);
+            ->add('Create Blog Post', SubmitType::class, ["attr" => ["class" => "btn btn-succsess"]]);
     }
 }
