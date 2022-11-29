@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Entries;
+use App\Form\EntriesType;
+
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,9 +25,31 @@ class EntriesController extends AbstractController
     }
 
     #[Route('/create', name: 'create')]
-    public function createEntry(): Response
+    public function createEntry(Request $request, ManagerRegistry $doctrine): Response
     {
-        return $this->render('entries/create.html.twig');
+        $entry = new Entries();
+        $form = $this->createForm(EntriesType::class, $entry);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $entry = $form->getData();
+            $entry->setCreateDate(new \DateTime('now'));
+
+            $doc = $doctrine->getManager();
+
+            $doc->persist($entry);
+            $doc->flush();
+
+            return $this->redirectToRoute('index');
+        }
+
+
+        return $this->render('todo/create.html.twig', [
+            "form" => $form->createView()
+        ]);
     }
 
     #[Route('/update/{id}', name: 'update')]
