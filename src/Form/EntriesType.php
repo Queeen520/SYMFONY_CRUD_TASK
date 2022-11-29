@@ -4,7 +4,7 @@
 namespace App\Form;
 
 use App\Entity\Entries;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -25,6 +25,13 @@ class EntriesType extends AbstractType
             ->add('visitDate', DateType::class, ["attr" => ["class" => "form-control mb-2"]])
             ->add('entryDate', DateType::class, ["attr" => ["class" => "form-control mb-2"]])
 
-            ->add('Create Blog Post', SubmitType::class, ["attr" => ["class" => "btn btn-succsess"]]);
+            ->add('Create Blog Post', SubmitType::class, ["attr" => ["class" => "btn btn-primary"]]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Entries::class
+        ]);
     }
 }

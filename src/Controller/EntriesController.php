@@ -47,7 +47,7 @@ class EntriesController extends AbstractController
         }
 
 
-        return $this->render('todo/create.html.twig', [
+        return $this->render('entries/create.html.twig', [
             "form" => $form->createView()
         ]);
     }
