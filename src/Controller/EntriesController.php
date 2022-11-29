@@ -43,8 +43,13 @@ class EntriesController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'delete')]
-    public function deleteEntry($id): Response
+    public function deleteEntry($id, ManagerRegistry $doctrine): Response
     {
-        return $this->render('entries/delete.html.twig');
+        $doc = $doctrine->getManager();
+        $entry = $doctrine->getRepository(Entries::class)->find($id);
+        $doc->remove($entry);
+        $doc->flush();
+
+        return $this->redirectToRoute("index");
     }
 }
