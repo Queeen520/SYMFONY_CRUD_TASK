@@ -18,14 +18,13 @@ class EntriesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, ["attr" => ["placeholder" => "please type the todo name", "class" => "form-control mb-2"]])
+            ->add('headline', TextType::class, ["attr" => ["placeholder" => "please tell us the blog post titel", "class" => "form-control mb-2"]])
             ->add('bloggerName', TextType::class, ["attr" => ["placeholder" => "Enter your Name", "class" => "form-control mb-2"]])
             ->add('destination', TextType::class, ["attr" => ["placeholder" => "Destination", "class" => "form-control mb-2"]])
             ->add('story', TextareaType::class, ["attr" => ["placeholder" => "Write your story here", "class" => "form-control mb-2"]])
             ->add('visitDate', DateType::class, ["attr" => ["class" => "form-control mb-2"]])
             ->add('entryDate', DateType::class, ["attr" => ["class" => "form-control mb-2"]])
-
-            ->add('Create Blog Post', SubmitType::class, ["attr" => ["class" => "btn btn-primary"]]);
+            ->add('CreatePost', SubmitType::class, ["attr" => ["class" => "btn btn-primary"]]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

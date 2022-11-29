@@ -29,8 +29,6 @@ class Entries
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $Entry_Date = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $img = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Story = null;
