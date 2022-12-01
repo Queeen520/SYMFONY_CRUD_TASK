@@ -14,6 +14,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Service\FileUploader;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
+
 
 class EntriesType extends AbstractType
 {
@@ -31,7 +37,7 @@ class EntriesType extends AbstractType
                 'choice_label' => 'name',
                 'attr' => ["class" => "form-control mb-2"]
             ])
-            ->add('CreatePost', SubmitType::class, ["attr" => ["class" => "btn btn-primary"]]);
+            ->add('Send', SubmitType::class, ["attr" => ["class" => "btn btn-primary"]]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

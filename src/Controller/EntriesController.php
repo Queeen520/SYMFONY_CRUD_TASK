@@ -53,12 +53,28 @@ class EntriesController extends AbstractController
     }
 
     #[Route('/update/{id}', name: 'update')]
-    public function updateEntry($id, ManagerRegistry $doctrine): Response
+    public function updateEntry($id, Request $request, ManagerRegistry $doctrine): Response
     {
         $entry = $doctrine->getRepository(Entries::class)->find($id);
-        return $this->render('entries/update.html.twig', [
-            "entry" => $entry
-        ]);
+        $form = $this->createForm(EntriesType::class, $entry);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $now = new \DateTime('now');
+            $entry = $form->getData();
+            $entry->setEntryDate($now);
+            $em = $doctrine->getManager();
+            $em->persist($entry);
+            $em->flush();
+            $this->addFlash(
+                'notice',
+                'Entry Edited'
+            );
+
+            return $this->redirectToRoute('entries');
+        }
+
+        return $this->render('entries/update.html.twig', ['form' => $form->createView()]);
     }
 
     #[Route('/details/{id}', name: 'details')]
