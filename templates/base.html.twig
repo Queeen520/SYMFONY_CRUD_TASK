@@ -27,32 +27,7 @@
     {% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand ps-4" href="/entries">Travel Blog</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/entries">Home</a> {# in the href you put
-            the route #}
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/create">New Entry</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    {% block body %}{% endblock %}
+    {% include "components/navbar.html.twig" %} {% block body %}{% endblock %}
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

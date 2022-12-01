@@ -34,7 +34,7 @@ class Entries
     private ?string $Story = null;
 
     #[ORM\ManyToOne]
-    private ?recommend $fk_recommend = null;
+    private ?Recommend $fk_recommend = null;
 
     public function getId(): ?int
     {
@@ -113,12 +113,12 @@ class Entries
         return $this;
     }
 
-    public function getFkRecommend(): ?recommend
+    public function getFkRecommend(): ?Recommend
     {
         return $this->fk_recommend;
     }
 
-    public function setFkRecommend(?recommend $fk_recommend): self
+    public function setFkRecommend(?Recommend $fk_recommend): self
     {
         $this->fk_recommend = $fk_recommend;
 

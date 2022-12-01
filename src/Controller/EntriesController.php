@@ -36,14 +36,14 @@ class EntriesController extends AbstractController
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
             $entry = $form->getData();
-            $entry->setCreateDate(new \DateTime('now'));
+            $entry->setEntryDate(new \DateTime('now'));
 
             $doc = $doctrine->getManager();
 
             $doc->persist($entry);
             $doc->flush();
 
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('entries');
         }
 
 
@@ -53,9 +53,12 @@ class EntriesController extends AbstractController
     }
 
     #[Route('/update/{id}', name: 'update')]
-    public function updateEntry($id): Response
+    public function updateEntry($id, ManagerRegistry $doctrine): Response
     {
-        return $this->render('entries/update.html.twig');
+        $entry = $doctrine->getRepository(Entries::class)->find($id);
+        return $this->render('entries/update.html.twig', [
+            "entry" => $entry
+        ]);
     }
 
     #[Route('/details/{id}', name: 'details')]
@@ -75,6 +78,6 @@ class EntriesController extends AbstractController
         $doc->remove($entry);
         $doc->flush();
 
-        return $this->redirectToRoute("index");
+        return $this->redirectToRoute("entries");
     }
 }
